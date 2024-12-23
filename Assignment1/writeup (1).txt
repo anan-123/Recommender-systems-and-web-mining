@@ -1,0 +1,42 @@
+ASSIGNMENT1 : PID: A69034019 NAME: Anandhini Rajendran
+The flow of code: 
+Part1:
+1. generate train, test and, user per book and other lists required
+2. create features: using popularity, mean rating etc. the features are defined in feat dict.
+3. Populate the X, and y for the model using user, book, and ratings in the rating train. I have added negative samples too making the new length of training double the original
+4. split the train into train and test sets.
+5. train the gradient boost classifier model: Gradient Boosting builds decision trees sequentially, where each tree tries to correct the errors made by the previous one. It focuses on reducing bias and is more sensitive to the data hence producing stronger predictions.
+6. For each pair in pair_Read.csv we write the predictions to predictions_Read.csv
+
+Part2: 
+1. The train csv and pair_rating csv have already been read in part1 first step.
+2. Convert the train data to surprise SVD format as required by the model
+3. Then do a grid search to find optimal hyperparameters. experimented with values like: 
+   'n_factors': [50,52,48,100,200,25,30],
+    'n_epochs': [40,42,38,20,30,50,100],
+    'lr_all': [0.002, 0.005, 0.01,0.1,1],
+    'reg_all': [0.4, 0.6, 0.8]
+4. Train the SVD using the best parameters obtained from grid search.
+5. Write the predictions using model.predict to predictions_Rating.csv
+
+Different Approaches used:
+Part2: Predict rating : using SVD and grid search for optimal hyperparams
+Models tried:
+1. Latent factor model implementation from scratch
+2. batch and regular gradient descent accuracies: 1.76, 1.74
+3. two different approaches with gradient descent : 1.7 and with alternate changes without gradient descent: 1.64 accuracy.
+4. After hyperparams tuning for gradient descent: 1.70 accuracy
+5. SVD : hyperparameter tuned form 1.45 accuracy to 1.41 - the best accuracy achieved
+(tried training with negative samples. RMSE reduced to 0.7 but the accuracy on leaderboard is too low indicating it may overfit.)
+6. SVM using one hot and ordinal encoding
+7. Homework3 baseline
+8. Derived features with svd and used Random forest model. Excellent RMSE but bad accuracy on leaderboard - indicates overfitting.
+
+Part 1
+Models tried:
+1. SVM 
+2. Gradient boost classifier - best accuracy:
+	Validation Accuracy: 0.7583
+	Cross-validation Accuracy: 0.7584
+3. Jaccard similarity - homework3 based solution - 0.71 accuracy
+
